@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--This file use for create Ansbile Project on Apache Ant-->
+<project name="ansibleTemlate" default="main">
+    <property name="dir.inventories" value="inventory"/>
+    <property name="dir.role" value="roles"/>
+    <property name="dir.group.vars" value="group_vars"/>
+    <property name="dir.host.vars" value="host_vars"/>
+    <property name="dir.dest" value="dest"/>
+
+    <target name="init">
+        <mkdir dir="${dir.dest}"/>
+    </target>
+    <target name="clean">
+        <delete dir="${dir.dest}"/>
+    </target>
+    <target name="createDiries">
+        <mkdir dir="${dir.dest}/${dir.inventories}" />
+        <mkdir dir="${dir.dest}/${dir.role}"/>
+        <mkdir dir="${dir.dest}/${dir.group.vars}"/>
+        <mkdir dir="${dir.dest}/${dir.host.vars}"/>
+    </target>
+
+    <target name="createConfig">
+        <copy file="files/ansible.cfg" todir="${dir.dest}"/>
+        <copy file="files/hosts" todir="${dir.dest}/${dir.inventories}"/>
+    </target>
+
+    <target name="createInventory">
+    </target>
+
+    <target name="main" depends="init,clean,createDiries,createConfig,createInventory"/>
+</project>
